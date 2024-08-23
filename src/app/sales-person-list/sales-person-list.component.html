@@ -4,14 +4,18 @@
             <th>Name</th>
             <th>Email</th>
             <th>Volume</th>
-            <!-- <th>Actions</th> -->
+            <th>Met Quota?</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let salesPerson of salesPersonList">
             <td>{{ salesPerson.firstName }} {{ salesPerson.lastName }}</td>
             <td>{{ salesPerson.email }}</td>
-            <td>{{ salesPerson.salesVolume }}</td>
+            <td>{{ salesPerson.salesVolume | currency: 'USD' }}</td>
+            <td>
+                <div *ngIf="salesPerson.salesVolume >= 60000; else myElseBlock">Yes</div>
+                <ng-template #myElseBlock>No</ng-template>
+            </td>
             <!-- <td>
                 <button (click)="updateSalesPerson(salesPerson.id)">Update</button>
                 <button (click)="deleteSalesPerson(salesPerson.id)">Delete</button>
